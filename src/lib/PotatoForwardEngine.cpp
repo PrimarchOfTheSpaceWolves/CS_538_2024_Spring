@@ -40,6 +40,13 @@ void PotatoForwardEngine::renderToDrawBuffer(Image<Vec3f> *drawBuffer) {
         drawLines(mesh, allFragments, DRAW_LINES_AS_WIREFRAME);
     }
 
+    // CIRCLE EXERCISE
+    Vert center;
+    center.pos = Vec3f(100.0f, 200.0f, 0.0f);
+    center.color = Vec4f(1.0f, 1.0f, 0.0f, 1.0f);
+    float r = 100.0f;
+    drawCircleMid(center, r, allFragments);
+
     // Merge fragments
     mergeFragments(allFragments, drawBuffer);
 }

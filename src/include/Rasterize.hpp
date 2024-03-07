@@ -25,4 +25,10 @@ namespace potato {
     void drawLineMid(Vert &startVert, Vert &endVert, vector<Fragment> &fragList, bool wireframe);    
     void fillTriangle(vector<Vert> &vertices, Face &face, vector<Fragment> &fragList);   
     
+    // Circle drawing exercise
+    void addOctantFragments(Vert &centerVert,
+                            float xoff, float yoff,
+                            vector<Fragment> &fragList);
+    void drawCircleMid(Vert &centerVert, float r,
+                        vector<Fragment> &fragList);
 };
