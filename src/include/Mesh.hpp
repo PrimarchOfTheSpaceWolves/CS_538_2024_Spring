@@ -14,32 +14,42 @@ namespace potato {
     struct Vert { 
         Vec3f pos {}; 
         Vec4f color {}; // [0,1] 
+        Vec3f normal {};
+        Vec4f viewPos {}; 
  
         Vert operator+(const Vert &other) const { 
             return { 
                 pos + other.pos, 
-                color + other.color 
+                color + other.color,
+                normal + other.normal,
+                viewPos + other.viewPos
             }; 
         }; 
  
         Vert operator-(const Vert &other) const { 
             return { 
                 pos - other.pos, 
-                color - other.color 
+                color - other.color,
+                normal - other.normal,
+                viewPos - other.viewPos
             }; 
         }; 
  
         Vert operator*(const Vert &other) const { 
             return { 
                 pos * other.pos, 
-                color * other.color 
+                color * other.color,
+                normal * other.normal,
+                viewPos * other.viewPos
             }; 
         }; 
  
         Vert operator*(const float &w) const { 
             return { 
                 pos * w, 
-                color * w 
+                color * w,
+                normal * w,
+                viewPos * w
             }; 
         }; 
     }; 
@@ -58,6 +68,29 @@ namespace potato {
  
         vector<Vert>& getVertices() { return vertices; }; 
         vector<Face>& getFaces() { return faces; }; 
+
+        void recomputeNormals() {
+            // Zero out normals first
+            for(int i = 0; i < vertices.size(); i++) {
+                vertices[i].normal = Vec3f(0,0,0);
+            }
+            // For each face...
+            for(Face &f : faces) {
+                Vert A = vertices[f.indices[0]];
+                Vert B = vertices[f.indices[1]];
+                Vert C = vertices[f.indices[2]];
+                Vec3f v1 = B.pos - A.pos;
+                Vec3f v2 = C.pos - A.pos;
+                Vec3f n = v1.cross(v2).normalize();
+                vertices[f.indices[0]].normal = vertices[f.indices[0]].normal + n;
+                vertices[f.indices[1]].normal = vertices[f.indices[1]].normal + n;
+                vertices[f.indices[2]].normal = vertices[f.indices[2]].normal + n;
+            }
+
+            for(int i = 0; i < vertices.size(); i++) {
+                vertices[i].normal = vertices[i].normal.normalize();
+            }
+        };
     }; 
  
     // Compute bounds for single face 

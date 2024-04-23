@@ -11,5 +11,7 @@ namespace potato {
     struct Fragment { 
         Vec3i pos {}; 
         Vec4f color {}; 
+        Vec3f normal {};
+        Vec4f viewPos {};
     }; 
 }; 

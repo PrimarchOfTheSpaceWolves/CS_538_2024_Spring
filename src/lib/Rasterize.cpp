@@ -83,6 +83,8 @@ namespace potato {
         Fragment frag;
         frag.pos = roundV(FV.pos);        
         frag.color = FV.color;
+        frag.normal = FV.normal;
+        frag.viewPos = FV.viewPos;
         return frag;
     };
 
