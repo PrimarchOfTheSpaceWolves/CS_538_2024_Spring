@@ -4,7 +4,7 @@
 using namespace std; 
  
 namespace potato { 
-        /////////////////////////////////////////////////////////////////////////// 
+    /////////////////////////////////////////////////////////////////////////// 
     // MAT4 
     /////////////////////////////////////////////////////////////////////////// 
  
@@ -105,7 +105,7 @@ namespace potato {
                 t.cols[1].dot(m.cols[0]), t.cols[1].dot(m.cols[1]), t.cols[1].dot(m.cols[2]), t.cols[1].dot(m.cols[3]), 
                 t.cols[2].dot(m.cols[0]), t.cols[2].dot(m.cols[1]), t.cols[2].dot(m.cols[2]), t.cols[2].dot(m.cols[3]), 
                 t.cols[3].dot(m.cols[0]), t.cols[3].dot(m.cols[1]), t.cols[3].dot(m.cols[2]), t.cols[3].dot(m.cols[3]), 
-            }; 
+            }.tranpose(); 
         }; 
  
         Mat4<T> operator*(const T &s) const 
@@ -209,7 +209,7 @@ namespace potato {
                 t.cols[0].dot(m.cols[0]), t.cols[0].dot(m.cols[1]), t.cols[0].dot(m.cols[2]), 
                 t.cols[1].dot(m.cols[0]), t.cols[1].dot(m.cols[1]), t.cols[1].dot(m.cols[2]), 
                 t.cols[2].dot(m.cols[0]), t.cols[2].dot(m.cols[1]), t.cols[2].dot(m.cols[2]), 
-            }; 
+            }.transpose(); 
         }; 
  
         Mat3<T> operator*(const T &s) const 

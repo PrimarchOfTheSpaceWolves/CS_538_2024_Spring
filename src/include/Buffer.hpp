@@ -37,7 +37,7 @@ namespace potato {
                 buffer[index] = val; 
             }; 
  
-            T get(int index) const { 
+            T& get(int index) const { 
                 return buffer[index]; 
             }; 
  
@@ -100,10 +100,15 @@ namespace potato {
             }; 
  
             void setPixel(int x, int y, const T &val) { 
-                Buffer<T>::set(getIndex(x,y), val); 
+                if(x >= 0 && y >= 0 && x < width && y < height) {
+                    Buffer<T>::set(getIndex(x,y), val); 
+                }
             }; 
  
             T& getPixel(int x, int y) const { 
+                x = max(0, min(x, width-1));
+                y = max(0, min(y, height-1));
+                
                 return Buffer<T>::get(getIndex(x,y)); 
             }; 
     }; 
